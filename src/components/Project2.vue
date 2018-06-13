@@ -1,12 +1,21 @@
+
 <template>
+
     <div class="container">
         <div class="holder">
             <form @submit.prevent="addSkill">
             <input type="text" placeholder="Enter your skills..." v-model="skill"
-            v-validate="'min:5'" name="skill"/>
-            <p class="errorForm" v-if="errors.has('skill')">{{errors.first('skill')}}</p>
-            <!-- {{skill}} -->
+            v-validate="'min:5|required'" name="skill"/>
+        
+            <!-- <p class="errorForm" v-if="errors.has('skill')">{{errors.first('skill')}}</p>
+            {{skill}} -->
             <!-- <input type="checkbox" v-model="checked"/> -->
+            <!--Hiệu ứng cho mess thông báo lỗi, sử dụng tag transition-->
+        
+            <transition name="errorForm-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+                <p class="errorForm" v-if="errors.has('skill')">{{errors.first('skill')}}</p>
+            </transition>
+
             </form>
             <ul>
                 <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
@@ -56,6 +65,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
     .holder {
         background: #fff;
     }
@@ -100,4 +111,23 @@
         border-color: #ebccd1;
         padding:10px;
     }
+    
+    /* tạo transiton, còn tạo animate thì thêm class của vue để sài animate.css dô */ 
+    /* p.errorForm-in-enter-active{
+        animation: bounce-in .5s;
+    }
+    p.errorForm-in-enter-leave{
+        animation: bounce-in .5s reverse;
+    }
+    @keyframes bounce-in {
+        0%{
+            transform: scale(0);
+        }
+        50%{
+            transform: scale(1.5);
+        }
+        100%{
+            transform: scale(1);
+        }
+    } */
 </style>
