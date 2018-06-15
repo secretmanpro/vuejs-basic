@@ -20,7 +20,9 @@
            
             <ul>
                 <transition-group name="list-skill" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-                    <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
+                    <li v-for="(data, index) in skills" :key='index'>{{data.skill}}
+                        <span class="icon-del" @click="removeSkill(index)"><i class="far fa-trash-alt"></i></span>
+                    </li>
                 </transition-group>
             </ul>
             
@@ -52,18 +54,21 @@
             addSkill(){
                 this.$validator.validateAll().then((result) =>{
                     if(this.skill == ""){
-                        console.log("Your input do not empty");
+                        console.log("Your input do not empty")
                     }
                     else if(result){
                         this.skills.push({skill: this.skill});
                         this.skill='';
                     }
                     else{
-                        console.log("Not validate");
+                        console.log("Not validate")
                     }
                 })
                
                 // console.log(this.checked);
+            },
+            removeSkill(id){
+                this.skills.splice(id,1);
             }
         }
     }
@@ -73,6 +78,8 @@
 
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import "https://use.fontawesome.com/releases/v5.0.13/css/all.css"; 
+
 
     .holder {
         background: #fff;
@@ -117,6 +124,15 @@
         background-color: #f2dede;
         border-color: #ebccd1;
         padding:10px;
+    }
+    .icon-del{
+        float: right;
+    }
+    .icon-del:hover{
+        cursor: pointer;
+    }
+    .icon-del i{
+        color:red;
     }
     
     /* tạo transiton, còn tạo animate thì thêm class của vue để sài animate.css dô */ 

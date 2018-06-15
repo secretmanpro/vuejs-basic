@@ -4,6 +4,7 @@
     <!-- <Project2/> -->
     <!-- <img src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+
     <nav>
        <router-link to="/">Home</router-link>
        <router-link to="/about">About</router-link>
@@ -35,7 +36,7 @@ export default {
 } */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-body {
+/* body {
   background-color: #EEEEEE;
   font-family: 'Montserrat', sans-serif;
   display: grid;
@@ -46,7 +47,7 @@ body {
 body, html {
   margin: 0;
   height: 100%;
-}
+} */
 #app {
     width: 50%;
 }

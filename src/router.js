@@ -12,7 +12,7 @@ export default new Router({
             component:Project2
         },
         {
-            path:"/about",
+            path:"/about/:name",
             name:"about",
             component:About
         }
