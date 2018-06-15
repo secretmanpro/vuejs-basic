@@ -5,7 +5,7 @@
         <div class="holder">
             <form @submit.prevent="addSkill">
             <input type="text" placeholder="Enter your skills..." v-model="skill"
-            v-validate="'min:5|required'" name="skill"/>
+            v-validate="'min:5'" name="skill"/>
         
             <!-- <p class="errorForm" v-if="errors.has('skill')">{{errors.first('skill')}}</p>
             {{skill}} -->
@@ -17,9 +17,13 @@
             </transition>
 
             </form>
+           
             <ul>
-                <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
+                <transition-group name="list-skill" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+                    <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
+                </transition-group>
             </ul>
+            
             <p>These are the skills that you possess.</p>
         </div>
     </div>
@@ -47,7 +51,10 @@
         methods:{
             addSkill(){
                 this.$validator.validateAll().then((result) =>{
-                    if(result){
+                    if(this.skill == ""){
+                        console.log("Your input do not empty");
+                    }
+                    else if(result){
                         this.skills.push({skill: this.skill});
                         this.skill='';
                     }
